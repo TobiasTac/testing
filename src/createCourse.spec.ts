@@ -9,3 +9,9 @@ it('should return the course object on success', async () => {
     name: 'Curso de Testes',
   });
 });
+
+it('should throw if no name is provided', async () => {
+  const coursePromise = createCourse({ name: '' });
+
+  await expect(coursePromise).rejects.toThrow(new Error('Name is required'));
+});

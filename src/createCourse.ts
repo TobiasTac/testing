@@ -10,6 +10,10 @@ type CreateCourseOutput = {
 }
 
 export async function createCourse(input: CreateCourseInput): Promise<CreateCourseOutput> {
+  if (!input.name.trim()) {
+    throw new Error('Name is required');
+  }
+  
   return {
     id: randomUUID(),
     name: input.name,
