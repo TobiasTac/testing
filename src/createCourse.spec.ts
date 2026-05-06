@@ -1,5 +1,8 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { createCourse } from "./createCourse";
+
+vi.useFakeTimers();
+vi.setSystemTime(new Date(2026, 4, 6))
 
 it('should return the course object on success', async () => {
   const course = await createCourse({ name: 'Curso de Testes' });
@@ -7,6 +10,7 @@ it('should return the course object on success', async () => {
   expect(course).toEqual({
     id: expect.any(String),
     name: 'Curso de Testes',
+    createdAt: new Date(),
   });
 });
 

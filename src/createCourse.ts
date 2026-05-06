@@ -7,6 +7,7 @@ type CreateCourseInput = {
 type CreateCourseOutput = {
   id: string;
   name: string;
+  createdAt: Date;
 }
 
 export async function createCourse(input: CreateCourseInput): Promise<CreateCourseOutput> {
@@ -17,5 +18,6 @@ export async function createCourse(input: CreateCourseInput): Promise<CreateCour
   return {
     id: randomUUID(),
     name: input.name,
+    createdAt: new Date(),
   };
 }
