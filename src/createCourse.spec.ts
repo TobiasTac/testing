@@ -1,4 +1,5 @@
 import { expect, it, vi } from "vitest";
+import { CourseRepository } from "./CourseRepository";
 import { createCourse } from "./createCourse";
 
 vi.useFakeTimers();
@@ -19,3 +20,12 @@ it('should throw if no name is provided', async () => {
 
   await expect(coursePromise).rejects.toThrow(new Error('Name is required'));
 });
+
+it('should call CourseRepository.create correctly', async () => {
+  const createSpy = vi.spyOn(CourseRepository.prototype, 'create')
+
+  await createCourse({ name: 'Curso de Testes' });
+
+  expect(createSpy).toHaveBeenCalledWith('Curso de Testes');
+  expect(createSpy).toHaveBeenCalledTimes(1);
+})
